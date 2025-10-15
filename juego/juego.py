@@ -1,104 +1,116 @@
-print('-----Hola, este es el juego del ahorcado-----\n')
-print('En este juego tendra 6 oportunidades para completar la palabra o adivinar la palabra \n')
-print('Reglas del juego \n')
-print('Solo se puede intentar adivinar una letra o la palabra por cada turno \n')
-print('Contara con 6 vidas para adivinar la palabra. Cada acierto incorrecto sera una oportunidad menos para adivinar la palabra \n')
-print('No se pueden usar numeros o caracteres especiales para adivinar la palabra, en ese caso se le restara una vida \n')
-print('Tampoco se pueden usar ni letras ni palabras repetidas \n')
-print('Que comience el juego')
+import tkinter as tk
 
-letras = ('a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z',
-            'A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-            'á','é','í','ó','ú')
+def juego_ ():
+    print('-----Hola, este es el juego del ahorcado-----\n')
+    print('En este juego tendra 6 oportunidades para completar la palabra o adivinar la palabra \n')
+    print('Reglas del juego \n')
+    print('Solo se puede intentar adivinar una letra o la palabra por cada turno \n')
+    print('Contara con 6 vidas para adivinar la palabra. Cada acierto incorrecto sera una oportunidad menos para adivinar la palabra \n')
+    print('No se pueden usar numeros o caracteres especiales para adivinar la palabra, en ese caso se le restara una vida \n')
+    print('Tampoco se pueden usar ni letras ni palabras repetidas \n')
+    print('Que comience el juego')
 
-import random
+    letras = ('a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z',
+                'A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+                'á','é','í','ó','ú')
 
-f = open('palabras.txt', 'r', encoding='utf-8')
-diccionario = f.readlines()
-f.close()
-diccionario = [p.strip() for p in diccionario]
-palabra = random.choice(diccionario)
+    import random
 
-adivinado = []
-palabras_usadas = []
+    f = open('palabras.txt', 'r', encoding='utf-8')
+    diccionario = f.readlines()
+    f.close()
+    diccionario = [p.strip() for p in diccionario]
+    palabra = random.choice(diccionario)
 
-for letra in palabra:
-    adivinado.append('_')
+    adivinado = []
+    palabras_usadas = []
 
-print('__________'),
-print('|')
-print('|')
-print('|')
-print('|')
-print(adivinado)
+    for letra in palabra:
+        adivinado.append('_')
 
-vidas = 6
-resultado = False
-print(palabra)
-
-while (vidas != 0) and (resultado == False):
-    respuesta = input('Ingrese una letra o palabra ')
-    if respuesta in adivinado:
-        print('letra ya usada')
-    elif respuesta == palabra:
-        print('adivinado')
-        resultado = True
-    elif respuesta in palabra:
-        i = 0
-        for letra in palabra:
-            if (respuesta == letra):
-                adivinado.pop(i)
-                adivinado.insert(i,respuesta)
-            if '_' not in adivinado:
-                resultado = True
-            i = i + 1 
-    else:
-        print('Incorrecto, la letra o palabra son incorrectos')
-        print('O ingreso un numero o caracter especial, por lo que se le restara una vida')
-        print('Vidas restantes: ',vidas)
-        vidas = vidas - 1
-        if vidas == 5:
-            print('__________'),
-            print('|        O ')
-            print('|')
-            print('|')
-            print('|')
-        elif vidas == 4:
-            print('__________'),
-            print('|        O')
-            print('|        |')
-            print('|        |')
-            print('|')
-        elif vidas == 3:
-            print('__________'),
-            print('|        O')
-            print('|       /|')
-            print('|        |')
-            print('|')
-        elif vidas == 2:
-            print('__________'),
-            print('|        O')
-            print('|       /|\\ ')
-            print('|        |')
-            print('|')
-        elif vidas == 1:
-            print('__________'),
-            print('|        O ')
-            print('|       /|\\ ')
-            print('|        | ')
-            print('|         \\ ')
-        elif vidas == 0:
-            print('__________'),
-            print('|        O ')
-            print('|       /|\\ ')
-            print('|        | ')
-            print('|       / \\ ')
-            
-    palabras_usadas.append(respuesta)
+    print('__________'),
+    print('|')
+    print('|')
+    print('|')
+    print('|')
     print(adivinado)
-    print(palabras_usadas)
-if vidas == 0:
-    print('Has perdido')
-else:
-    print('Felicidades has ganado!')
-print('La palabra completa era: ',palabra)
+
+    vidas = 6
+    resultado = False
+    print(palabra)
+
+    while (vidas != 0) and (resultado == False):
+        respuesta = input('Ingrese una letra o palabra ')
+        if respuesta in adivinado:
+            print('letra ya usada')
+        elif respuesta == palabra:
+            print('adivinado')
+            resultado = True
+        elif respuesta in palabra:
+            i = 0
+            for letra in palabra:
+                if (respuesta == letra):
+                    adivinado.pop(i)
+                    adivinado.insert(i,respuesta)
+                if '_' not in adivinado:
+                    resultado = True
+                i = i + 1 
+        else:
+            print('Incorrecto, la letra o palabra son incorrectos')
+            print('O ingreso un numero o caracter especial, por lo que se le restara una vida')
+            print('Vidas restantes: ',vidas)
+            vidas = vidas - 1
+            if vidas == 5:
+                print('__________'),
+                print('|        O ')
+                print('|')
+                print('|')
+                print('|')
+            elif vidas == 4:
+                print('__________'),
+                print('|        O')
+                print('|        |')
+                print('|        |')
+                print('|')
+            elif vidas == 3:
+                print('__________'),
+                print('|        O')
+                print('|       /|')
+                print('|        |')
+                print('|')
+            elif vidas == 2:
+                print('__________'),
+                print('|        O')
+                print('|       /|\\ ')
+                print('|        |')
+                print('|')
+            elif vidas == 1:
+                print('__________'),
+                print('|        O ')
+                print('|       /|\\ ')
+                print('|        | ')
+                print('|         \\ ')
+            elif vidas == 0:
+                print('__________'),
+                print('|        O ')
+                print('|       /|\\ ')
+                print('|        | ')
+                print('|       / \\ ')
+                
+        palabras_usadas.append(respuesta)
+        print(adivinado)
+        print(palabras_usadas)
+    if vidas == 0:
+        print('Has perdido')
+    else:
+        print('Felicidades has ganado!')
+    print('La palabra completa era: ',palabra)
+
+ventana = tk.Tk()
+ventana.title('Mi primer juego en python')
+ventana.geometry('400x400')
+
+juego = tk.Button(ventana, text='Ejecutar juego', command= juego_)
+juego.pack()
+
+ventana.mainloop()
